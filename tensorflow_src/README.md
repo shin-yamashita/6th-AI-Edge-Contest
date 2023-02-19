@@ -26,9 +26,11 @@ tflite_delegate/
 Linux 用（Reference model） と、 KV260-pynq 用(FPGA とのインターフェース) でソースは共通。   
 
 test vector file を出力するには、MyDelegate.cc の以下の２つの変数を設定する。  
-static int dumpfrom = 0;  
-static int dumpto = 65;    
-推論アプリを実行し、Reference model (C++) に delegate すると、"tdump-%d-i8.in" というファイル名で Conv パラメータ + input/filter/bias/output の Tensor データを出力する。論理シミュレーション環境で一致検証用に用いる。
+```
+static int dumpfrom = 0; // layer 0 ~ 34 まで出力する例  
+static int dumpto = 34;  //  
+```
+推論アプリを実行し、Reference model (C++) に delegate すると、"tvec/tdump-%d-i8.in" というファイル名で Conv パラメータ + input/filter/bias/output の Tensor データを出力する。tvec/* を論理シミュレーション環境にコピーし、一致検証用に用いる。
 
 
 ## Build TensorFlow Lite Python Wheel Package
@@ -82,9 +84,9 @@ build には bazel を用いており、Linux PC と KV260 で build 手順は�
    **bazel の導入**  
    https://bazel.build/install/bazelisk?hl=ja を参照  
    https://github.com/bazelbuild/bazelisk/releases  から bazelisk binary を download  
-   - Linux PC : bazelisk-linux-amd64
-   - KV260 :  bazelisk-linux-arm64
-   実行パスに bazel として配置する。  
+   - Linux PC : bazelisk-linux-amd64  
+   - KV260 :  bazelisk-linux-arm64  
+   任意の実行パスに bazel として配置する。  
    ```bash
    ex: 
    $ cp bazelisk-linux-amd64 ~/bin/
@@ -141,10 +143,4 @@ cen_offset = interpreter.get_tensor(output_details[1]['index'])[0]
 det = postproc.postproc(heatmap, cen_offset)
   :
 ```
-
-
-
-
-
-
 
