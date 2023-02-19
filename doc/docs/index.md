@@ -1,7 +1,7 @@
 
-# 6th AI Edge Contest / TFlite delegate と rv32emc を用いた実装
+# TFlite delegate と rv32emc を RTL で実装
 
-2023/01/28   　 s.yamashita
+2023/02/19   　 s.yamashita
 
 ## 課題
 
