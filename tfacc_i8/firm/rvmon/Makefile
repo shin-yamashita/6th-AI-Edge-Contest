@@ -96,6 +96,9 @@ clean:
 %.dep:	%.S
 	$(CC) $(CFLAGS) -MM $< > $@
 
+%.dep:	%.cc
+	$(CPP) $(CPPFLAGS) -MM $< > $@
+
 depend:	$(DEPS)
 	cp Makefile Makefile.bak
 	sed '/^#----- dependences -----/q' Makefile.bak >Makefile
@@ -106,7 +109,10 @@ depend:	$(DEPS)
 #----- dependences -----
 
 crt0.o: crt0.S
-pre_data.o: pre_data.c include/stdio.h include/types.h include/stdint.h lib/libmc.a 
+memtst.o: memtst.c include/stdio.h include/types.h include/stdint.h \
+ include/ulib.h include/time.h include/ulib.h include/uartdrv.h lib/libmc.a 
+rv_preproc.o: rv_preproc.cc include/stdint.h include/stdio.h \
+ include/types.h include/tfacc.h include/uartdrv.h
 rvmon.o: rvmon.c include/stdio.h include/types.h include/stdint.h \
  include/ulib.h include/time.h include/ulib.h include/uartdrv.h \
  include/tfacc.h include/readline.h lib/libmc.a 
