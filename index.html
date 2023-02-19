@@ -1,0 +1,691 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.7">
+    
+    
+      
+        <title>6th-AI-Edge-Contest</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.9d5733d3.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6th-ai-edge-contest-tflite-delegate-rv32emc" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="6th-AI-Edge-Contest" class="md-header__button md-logo" aria-label="6th-AI-Edge-Contest" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            6th-AI-Edge-Contest
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6th AI Edge Contest / TFlite delegate と rv32emc を用いた実装
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/shin-yamashita/6th-AI-Edge-Contest" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    shin-yamashita/6th-AI-Edge-Contest
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="6th-AI-Edge-Contest" class="md-nav__button md-logo" aria-label="6th-AI-Edge-Contest" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    6th-AI-Edge-Contest
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/shin-yamashita/6th-AI-Edge-Contest" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    shin-yamashita/6th-AI-Edge-Contest
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          6th AI Edge Contest / TFlite delegate と rv32emc を用いた実装
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="index.html" class="md-nav__link md-nav__link--active">
+        6th AI Edge Contest / TFlite delegate と rv32emc を用いた実装
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    課題
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    概要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    推論ネットワーク
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    全体システム構成
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rv32emc-core" class="md-nav__link">
+    rv32emc core のハードウェア
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fpga" class="md-nav__link">
+    FPGAに実装したハードウエア構成
+  </a>
+  
+    <nav class="md-nav" aria-label="FPGAに実装したハードウエア構成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fpga_1" class="md-nav__link">
+    論理合成、FPGA 実装
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    アプリケーション
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risc-v" class="md-nav__link">
+    RISC-V と推論実行アプリのシーケンス。
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    実行結果
+  </a>
+  
+    <nav class="md-nav" aria-label="実行結果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    推論処理時間詳細
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    まとめ、今後の課題
+  </a>
+  
+    <nav class="md-nav" aria-label="まとめ、今後の課題">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    今後の課題
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="6th-ai-edge-contest-tflite-delegate-rv32emc">6th AI Edge Contest / TFlite delegate と rv32emc を用いた実装<a class="headerlink" href="#6th-ai-edge-contest-tflite-delegate-rv32emc" title="Permanent link">&para;</a></h1>
+<p>2023/01/28   　 s.yamashita</p>
+<h2 id="_1">課題<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>車両前方の画像および全方位の点群データから、3D物体検出を行うアルゴリズムを作成</li>
+<li>開発したアルゴリズムを、RISC-Vを搭載したプラットフォームに実装</li>
+</ul>
+<h2 id="_2">概要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>今回の課題に対し、TensorFlow Lite(以下TFlite) の delegate 機構を用いた FPGA アクセラレータを開発した<br />
+  (第5回コンテストで用いたものを out channel 4並列実行するよう修正して用いた)  </li>
+<li>RISC-V は rv32emc に対応する CPU core を scratch から開発した<br />
+  (第5回コンテストで用いたものに fpu を組み込んだ。fpu は整数レジスタを用いる形式"Zfinx"とした)  </li>
+<li>アクセラレータの実行制御と、lider data から BEV 画像を生成する pre 処理を１つの RISC-Vで行った   </li>
+<li>FPGA への実装は、アクセラレータ、RISC-V core とも SystemVerilog を用いた RTL 記述で行った  </li>
+<li>推論ネットワークは Super-Fast-Accurate-3D-Object-Detection-PyTorch<a href="https://github.com/maudzung/SFA3D">^1</a> をベースに学習を行い、pytorch → TFlite 変換の後 8bit 量子化を行った  </li>
+<li>アプリケーションは TFlite の python インターフェースと python C API を用い、RISC-V での BEV 画像生成処理は C言語で開発した  </li>
+</ul>
+<hr>
+
+<h2 id="_3">推論ネットワーク<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>3D物体検出のベースネットワークは Super-Fast-Accurate-3D-Object-Detection-PyTorch<a href="https://github.com/maudzung/SFA3D">^1</a> (SFA3D) を選択した<br />
+  車両全方位の lider データから BEV 鳥瞰画像を生成し、fpn_resnet_18 を用いた centernet で物体中心座標を推論する  </li>
+<li>学習には提供された OperaDataset のうち、全方位でアノテーションされているデータのみ用い、train 90% val 10% に分けて学習した  </li>
+<li>今回の課題では物体の中心座標のみ求めるので、動作速度の観点でネットワークの出力を heatmap と center offset に絞った<br />
+  また、fpn_resnet_18 の中の ReLU を ReLU6 に変更したところ量子化後の精度が若干改善した  </li>
+</ul>
+<p><a href="https://github.com/maudzung/SFA3D">^1 SFA3D</a></p>
+<div style="page-break-before:always"></div>
+
+<ul>
+<li>学習後の pytorch ネットワークを TFlite に変換し、8bit 量子化を行った  <ul>
+<li>pytorch model を openvino2tensorflow<a href="https://qiita.com/PINTO/items/7a0bcaacc77bb5d6abb1">^2</a> で TFlite に変換し、Training 後の量子化を行って、8bit に量子化した  </li>
+<li>TFlite のネットワークを編集し、Pad+Conv2D(valid) を Conv2D(same) に置き換えた(図1)<br />
+ pytorch → TFlite 変換で、Conv2D の仕様の不整合<a href="https://stackoverflow.com/questions/52975843/comparing-conv2d-with-padding-between-tensorflow-and-pytorch">^3</a>から pytorch:Conv2D(same) -&gt; TFlite:Pad+Conv2D(valid) に変換されてしまう(余分な Pad 処理が発生する)<br />
+  Conv2D の stride 設定が 1 のときは単純に Pad をバイパスし、valid を same に書き換えればよいが、stride が 2 のときに Conv2D の出力位相が合わなくなる。strideが 2 のノードは FPGA のアクセラレータの設定を修正して位相を合わせるようにした  </li>
+</ul>
+</li>
+</ul>
+<figure>
+<img src=rimg/torch_to_tflite_conv.svg >
+ <figcaption>図1. pytorch → TFlite 変換で余分なPADが発生する問題と対処</figcaption></figure>
+
+<ul>
+<li>ベースのネットワークは BEV 画像サイズが 608x608 であるが、FPGAでの実行時間と推論精度のトレードオフを取るため 320x320 及び 448x448 のネットワークも学習した<br />
+  図2 に BEV 画像と heatmap 画像の例 (320x320) を示す  </li>
+</ul>
+<p><a href="https://qiita.com/PINTO/items/7a0bcaacc77bb5d6abb1">^2 openvino2tensorflow</a></p>
+<p><a href="https://stackoverflow.com/questions/52975843/comparing-conv2d-with-padding-between-tensorflow-and-pytorch">^3 comparing-conv2d-with-padding-between-tensorflow-and-pytorch</a></p>
+<div style="page-break-before:always"></div>
+
+<ul>
+<li>BEV の幅は、100m 相当にしたが、幅 84m 相当にして車体進行方向を45度傾けたパターン(R45 図2下)も試した<br />
+  幅 84m では車の検出範囲 50m を超える領域が発生し車の検出を取りこぼすが、検出しにくい歩行者の検出率を上げる効果がある<br />
+  また、車体斜め45度方向の車の出現頻度は車体正面より少ない様であり、実用的にも車体正面が重要であるので正面の検出範囲を広げるのが良いと考えた  </li>
+</ul>
+<figure>
+ <img src=rimg/bev-capture.svg width=640>
+ <figcaption>図2.BEV 画像と heatmap 画像</figcaption></figure>
+
+<div style="page-break-before:always"></div>
+
+<ul>
+<li>図3 は BEV の画像サイズ(S/M/L : 320/448/608)と、45度傾けたパターン(R45) による Average Precision の変化である<br />
+  計測は、KV-260 上で実行した。用いたデータは学習時に val 用に分けたデータである<br />
+  train と val のデータは似通っているので AP が高めに出ている。(リーダーボードではサイズ 608 で mAP = 0.32 であり大きな乖離がある)<br />
+  また、FPGA で実行した AP は CPU で実行した AP より若干(~4%程度)低い。整数演算であるが、Acc の丸め処理に若干差がありこれが要因の可能性がある  </li>
+<li>BEV 画像サイズが小さくなると、特に歩行者の検出率が顕著に低下する<br />
+  R45 では BEV 画像サイズが小さいときの歩行者の検出率が上がっており、効果が認められる  </li>
+</ul>
+<figure>
+ <img src=rimg/average_precision.svg width=720>
+ <figcaption>図3.BEV 画像サイズと R45 による Average Precision の比較</figcaption></figure>
+
+<ul>
+<li>以下は、TFlite の benchmark tool を KV-260 の CPU(aarch64) 上で実行し、今回のネットワーク(608x608)を分析した結果である。<br />
+  CPU での推論実行時間は約 7.55 s であり、Conv2D の演算で 96.2% を占める。Conv2D 演算を FPGA にdelegate する<br />
+<div class="highlight"><pre><span></span><code>Number of nodes executed: 79
+============================ Summary by node type ===========
+            [Node type] [count] [avg ms]  [avg %]   [cdf %]
+                CONV_2D      35 7264.019  96.151%   96.151%
+        RESIZE_BILINEAR       3  121.071   1.603%   97.754%
+                    ADD       8   45.425   0.601%   98.355%
+                    SUM       2   44.592   0.590%   98.945%
+               QUANTIZE      11   25.896   0.343%   99.288%
+          CONCATENATION       5   22.259   0.295%   99.583%
+            MAX_POOL_2D       1   15.889   0.210%   99.793%
+                SOFTMAX       2   11.255   0.149%   99.942%
+RESIZE_NEAREST_NEIGHBOR       2    2.091   0.028%   99.969%
+                    MUL       2    1.682   0.022%   99.992%
+             DEQUANTIZE       2    0.441   0.006%   99.998%
+                RESHAPE       6    0.182   0.002%  100.000%
+                          total 7554.84 ms
+</code></pre></div></li>
+</ul>
+<div style="page-break-before:always"></div>
+
+<hr>
+
+<h2 id="_4">全体システム構成<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>図4 にシステム構成を示す。<br />
+TFlite の Interpreter（推論プログラム）には外部のアクセラレータを接続する delegate API があり<a href="https://www.tensorflow.org/lite/performance/implementing_delegate">^4</a>、これを用いて FPGA に演算を委譲する。  </p>
+<p><a href="https://www.tensorflow.org/lite/performance/implementing_delegate">^4 implementing_delegate</a></p>
+<figure><img src=rimg/appli-3.svg width=570><figcaption>図4.システム構成</figcaption></figure>
+
+<p>新たに作成したFPGAとのインターフェース関数 dummy_external_delegate.so を Interpreter にリンクする。<br />
+ インターフェース関数は起動時にdelegate する演算種別 Conv2D, depthwiseConv2D の２つを登録する。(今回のネットワークでは depthwise は使われていないが、回路規模は変わらないので残してある)<br />
+ Interpreter を起動すると、FlatBuffer 形式の graph を実行し、登録した演算のみインターフェース関数に渡される。  <br />
+インターフェース関数には Conv 演算のパラメータと、input, filter, bias, output の４つの Tensor へのポインターが渡されるので、パラメータとポインターを FPGA に渡して ハードウェアのシーケンサーを kick し、演算終了を待つ。  <br />
+Tensor へのポインターは、Linux の仮想記憶領域にあり、直接FPGAからアクセスできない。<br />
+Interpreter起動時、インターフェース関数の Prepare() が一度だけ呼ばれるので、この中で予め Tensorデータを CMA 領域に copy しておき、この領域で FPGA とデータをやり取りする。<br />
+また、output channel ごとの量子化パラメータ quant を計算する必要があり、一度だけ計算して CMA 領域に保持する。<br />
+今回は、第５回コンテストで用いたアクセラレータに、output channel を 4並列で処理するように変更を行ったが、アクセラレータの Conv filter 係数のアクセス順序が連続するように filter 係数の並べ替えを行った。この並べかえも Prepare() で行った。　  </p>
+<p>FPGA に渡した Conv演算パラメータは、FPGA 側に設けた RISC-V CPU で並列演算に対応した形に変換して Conv演算アクセラレータのシーケンサに与え、kick する。<br />
+FPGA の CPU は、シーケンサの終了を待って、output buffer に残ったデータを CMA 領域に flush して演算を終了し、アプリケーションに通知する。  </p>
+<p>以上が Interpreter と FPGA アクセラレーターが連携して推論ネットワークの演算を行う流れである。<br />
+今回の課題では、 lider data を BEV 画像に変換する pre 処理、ネットワークの出力である heatmap から物体位置を計算する post 処理が必要である。<br />
+これらの処理のうち、より多くの演算処理の必要な pre 処理を、RISC-V で実行した。更に、pre 処理と Interpreter の推論処理を並行して実行できるようにして実行時間の増大を抑えた。  </p>
+<p>アクセラレーターの制御は RISC-V の割り込み処理で行っており、pre 処理と平行に実行される。  </p>
+<p><br><br><br><br></p>
+<hr>
+
+<h2 id="rv32emc-core">rv32emc core のハードウェア<a class="headerlink" href="#rv32emc-core" title="Permanent link">&para;</a></h2>
+<p>第5回コンテストで用いた RISC-V コアは、SystemVerilog で scratch から記述したものである。<br />
+RISC-V の ISA のうち、組み込み用途向けの EMC (32bit 16 Register, Mul/Div, Compressed 命令) の構成で開発した。<a href="https://github.com/shin-yamashita/rv32emc">^5</a><br />
+今回この CPU core に fpu を追加した。<br />
+fp レジスタを設けずに、整数レジスタを共用する Zfinx 仕様<a href="https://wiki.riscv.org/display/HOME/Zfinx+TG">^6</a>としてハード規模を抑えた。ただし、fmadd/fmsub 命令は３オペランド命令で追加による変更規模が大きく、実装しなかった。<br />
+クロスコンパイラは riscv-gnu-toolchain で Zfinx に対応したもの<a href="https://github.com/pz9115/riscv-gcc/wiki/How-to-regression-test">^7</a> (gcc バージョンは 10.2.0) に改造を加え fmadd/fmsub を使わないようにする修正を行っている。</p>
+<div class="highlight"><pre><span></span><code>[^7]にしたがってインストール
+zfinx/riscv-gcc/gcc/config/riscv/riscv.md を修正→fmadd/fmsubを生成する条件をdisable
+
+$ ./configure --prefix=/opt/rv32e/ --with-abi=ilp32e --with-arch=rv32emczfinx --with-multilib-generator=&#39;rv32emczfinx-ilp32e--&#39;
+$ make newlib
+</code></pre></div>
+<p><a href="https://github.com/shin-yamashita/rv32emc">^5 github shin-yamashita/rv32emc</a></p>
+<p><a href="https://wiki.riscv.org/display/HOME/Zfinx+TG">^6 Zfinx+TG riscv.org</a></p>
+<p><a href="https://github.com/pz9115/riscv-gcc/wiki/How-to-regression-test">^7 risc-v gcc for Zfinx (How-to-regression-test)</a></p>
+<div style="page-break-before:always"></div>
+<hr>
+
+<h2 id="fpga">FPGAに実装したハードウエア構成<a class="headerlink" href="#fpga" title="Permanent link">&para;</a></h2>
+<p>図5に FPGA PL 部に実装したアクセラレータのブロック構成を示す。<br />
+第5回コンテストで用いた回路を output channel 4 並列処理できるように修正し、制御及び lider data プレ処理用 CPU として前述の rv32emc CPU を用いた。<br />
+また、CPU とアクセラレータのクロックを分離し、コントロールが非同期でできるように改修したので、CPU とアクセラレータのクロック周波数を独立して設定できるようになった。  </p>
+<p>PS のアプリケーションは、AXI-APB bridge を介してRISC-V の RAM をアクセスすることができる。<br />
+RISC-V の実行バイナリを RAM にロードし、reset を解除することで CPU を起動する。<br />
+また、APB から 割り込みを発生し、アクセラレータの制御を kick する。  </p>
+<figure><img src=rimg/tfacc-blk-6th.svg width=800><figcaption>図5. PL ブロック図</figcaption></figure>
+
+<p>Accelerator 部では、Tensor data のアドレスを発生する adrgen からのアドレスにしたがって Tensor data にアクセスする。  <br />
+畳み込み演算回路(MAC)で input tensor と filter tensor を乗算、累算し、bias を加えたのち8bitに量子化し、output tensor に出力する。 Conv2D と dwConv2D の２種の演算で MAC 回路は共通であり、アドレス発生パターンが異なるのみである。 <br />
+ input, filter, bias, quant, output の5つのデータアクセスは、S_AXI_HPC0_FPD ポートを介して PS の CMA 領域をアクセスする。<br />
+これらのデータは、output channel ４並列単位でアクセスされる。<br />
+ MAC は、Np(x4) 個並列に実装されており、input, output のデータアクセスには Np 個並列にキャッシュメモリを設けた。filter, bias, quant は全ての MAC 演算で共通なので、それぞれ１個のキャッシュメモリを設けた。<br />
+ filter, bias, quant, output は連続アクセスなので、FIFOバッファのような構造で良いが、input は畳み込みのタップで大きくアドレスが飛ぶので、16ラインのキャッシュメモリ構造にした。(図6.input-cache ブロック図 参照） </p>
+<figure><img src=rimg/input_cache_blk.svg width=500><figcaption>
+図6. input-cache ブロック図  　　　　　　　　　 図7. Np 分割</figcaption></figure>
+
+<p>並列化のアドレス分割は、図7に示すように、output Tensor の W x H を Np 分割する。C を共通にすることで、filter, bias, quant のキャッシュが１系統ですむ。 ただし、W x H &lt; Np のときは並列数は W x H に制限される。</p>
+<p>インターフェース関数から渡される演算パラメータは、M_AXI_HPM0_FPD ポート axi-apb ブリッジを介し、アクセラレータ制御用 RISC-V CPU に渡される。<br />
+  Np個並列の input/output それぞれに異なるアドレス発生を行うため、CPU は adrgen ブロックに Np種類のアドレスを計算し、設定を行う。<br />
+並列に実装するアドレス発生回路をできるだけ簡単化してハード規模を抑えるために、CPU にアドレス計算を分担するようにした。また、この CPU にはシリアルターミナルを接続できるようにし、デバッグおよび実行時間の観測などにも活用した。
+<br></p>
+<div style="page-break-before:always"></div>
+<hr>
+
+<h4 id="fpga_1">論理合成、FPGA 実装<a class="headerlink" href="#fpga_1" title="Permanent link">&para;</a></h4>
+<p>作成した RTL module を Vivado の Block Design ツールに読み込んで Zynq と接続した。<br />
+  (図8. Block Design　色付きのブロックがRTLブロック)<br />
+ Np 、キャッシュサイズ、クロック周波数などパラメータを変えて論理合成を繰り返し、エリア及びタイミングが MET できるように RTL 記述にフィードバックした。</p>
+<figure><img src=rimg/design_1_r.png><figcaption>
+図8. Block Design</figcaption></figure>
+
+<p>図9 は最終的な FPGA のリソース使用率である。<br />
+　 並列数 Np = 32 (MAC 128 並列)<br />
+　 アクセラレータクロック周波数 = 187 MHz<br />
+　 RISC-V クロック周波数 = 100MHz <br />
+BRAM が 100% 近くになっており、これ以上の並列数増加は難しい。また使用率が上がるに従ってタイミングが厳しくなり、クロック周波数を上げられない。<br />
+一方で LUT / DSP にはまだ余裕があり、FPGAリソースを最大限に活用するには構造の見直しが必要である。  </p>
+<figure><img src=rimg/utilization-2023-1-18.png width=350><figcaption>
+図9. Utilization</figcaption></figure>
+
+<div style="page-break-before:always"></div>
+<hr>
+
+<h2 id="_5">アプリケーション<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>今回、推論の実行アプリケーションは python で作成した。<br />
+ライブラリ tflite_runtime<a href="https://www.tensorflow.org/lite/guide/python">^8</a> を用いる。(KV260 用に tensorflow のソースツリーで cross build する必要があった)<br />
+  新たに作成した delegate インターフェースは、ダイナミックリンクライブラリ(dummy_external_delegate.so)として tflite_runtime とリンクすることで実行の delegate が行われる。<br />
+ tflite_runtime の python インターフェースでは interpreter のインスタンス時に dummy_external_delegate.so を指定してリンクするだけである。</p>
+<p><a href="https://www.tensorflow.org/lite/guide/python">^8 tflite_runtime</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tflite_runtime.interpreter</span> <span class="k">as</span> <span class="nn">tflite</span>
+<span class="c1"># Instantiate interpreter</span>
+<span class="n">interpreter</span> <span class="o">=</span> <span class="n">tflite</span><span class="o">.</span><span class="n">Interpreter</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> 
+      <span class="n">experimental_delegates</span><span class="o">=</span><span class="p">[</span><span class="n">tflite</span><span class="o">.</span><span class="n">load_delegate</span><span class="p">(</span>
+        　　　　　　　<span class="s1">&#39;{path-to}/dummy_external_delegate.so.1&#39;</span><span class="p">)]</span> <span class="p">)</span>      
+<span class="n">interpreter</span><span class="o">.</span><span class="n">allocate_tensors</span><span class="p">()</span>
+<span class="c1"># Get input and output tensors.</span>
+<span class="n">input_details</span>  <span class="o">=</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">get_input_details</span><span class="p">()</span>
+<span class="n">output_details</span> <span class="o">=</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">get_output_details</span><span class="p">()</span>
+  <span class="p">:</span>
+<span class="c1"># preproc</span>
+<span class="n">bev_image</span> <span class="o">=</span> <span class="n">preproc</span><span class="o">.</span><span class="n">preproc</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>  <span class="c1"># lider data -&gt; BEV image</span>
+<span class="c1"># set image</span>
+<span class="n">interpreter</span><span class="o">.</span><span class="n">set_tensor</span><span class="p">(</span><span class="n">input_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;index&#39;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">(</span><span class="n">bev_image</span><span class="p">))</span> 
+<span class="c1"># Invoke</span>
+<span class="n">interpreter</span><span class="o">.</span><span class="n">invoke</span><span class="p">()</span>
+<span class="c1"># Output inference result</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">get_tensor</span><span class="p">(</span><span class="n">output_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;index&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">cen_offset</span> <span class="o">=</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">get_tensor</span><span class="p">(</span><span class="n">output_details</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;index&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># postproc</span>
+<span class="n">det</span> <span class="o">=</span> <span class="n">postproc</span><span class="o">.</span><span class="n">postproc</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">cen_offset</span><span class="p">)</span>
+  <span class="p">:</span>
+</code></pre></div></p>
+<div style="page-break-before:always"></div>
+<hr>
+
+<h2 id="risc-v">RISC-V と推論実行アプリのシーケンス。<a class="headerlink" href="#risc-v" title="Permanent link">&para;</a></h2>
+<p>以下、推論実行のシーケンスである  </p>
+<ol>
+<li>lider data を file から読み込み、python C API を介して preproc module に渡す  </li>
+<li>preproc module は lider data を CMA 領域にコピーし、RISC-V を kick する  </li>
+<li>RISC-V は lider data から BEV 画像への変換処理を行う  </li>
+<li>1 frame 前の preproc で生成された BEV 画像を TFlite interpreter に set_tensor() して invoke() する  </li>
+<li>推論結果の heatmap と center-offset から物体位置を計算し、json に出力する  </li>
+</ol>
+<p>処理 3. と処理 4. が並列に行われる。<br />
+RISC-V ではアクセラレータの制御は割り込み処理によって行われ、preproc の BEV画像生成処理と並列に実行される。  </p>
+<figure><img src=rimg/ppbg-sequence.svg width=800><figcaption>
+図10. 推論実行アプリシーケンス</figcaption></figure>
+
+<h2 id="_6">実行結果<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h4 id="_7">推論処理時間詳細<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p>推論時間は、PS の CPU と FPGA/RISC-V で分担されており、FPGAの実行時間は FPGA内に実装したカウンタで測定した。<br />
+図11 に結果を示す。</p>
+<figure><img src=rimg/elapsed.svg><figcaption>
+図11. 推論処理時間</figcaption></figure>
+<p>グラフの Conv(黄色) 部分、畳み込み演算そのものの実行時間が支配的である。<br />
+RISC-V の preproc は並行して処理され、表には現れない。  </p>
+<div style="page-break-before:always"></div>
+<hr>
+
+<h2 id="_8">まとめ、今後の課題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>TensorFlow Lite の delegate 機構を用いた FPGA アクセラレータを開発し、課題に対する動作を確認することができた。<br />
+  この方式は、既存の TFlite のフレームワークを変えることなく、そのまま使える特徴がある。  </p>
+</li>
+<li>
+<p>アクセラレータは output チャンネルの 4並列化を実装し、MACの並列数を 128 並列にすることができた。
+  ソフトウェアで filter 係数の並べ替えを行うことでハードウエアの複雑化を回避した。  </p>
+</li>
+<li>
+<p>RISC-V (rv32emc) を RTL で実装し、FPGAに組み込んで、アクセラレータ制御と Lider データの前処理に用いた。 
+  Zfinx 仕様の fpu を新たに開発して組み込み、Lider data の処理に活用した。  </p>
+</li>
+</ul>
+<h3 id="_9">今後の課題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>CPUでの推論実行に対し、FPGA での実行で推論精度が若干低下することがわかっている。
+acc 回路の丸めについて詳細に調査する必要がある。  </p>
+</li>
+<li>
+<p>動作速度は CPU 100MHz、アクセラレータ 187MHz が限界であった。クリチカルパスを調査し、論理段数を減らす必要がある。<br />
+  アクセラレータは pipeline 化の余地がある。CPU は compress 命令対応が速度低下の一因であるので仕様変更が有効かもしれない。  </p>
+</li>
+<li>
+<p>これまでアクセラレータに delegate する演算を Conv2D に限ってきたが、ハード規模の増大を抑えつつ対応できる演算を増やすことを考えてみたい。  </p>
+</li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["toc.integrate", "navigation.top"], "search": "assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.e87a5f81.min.js"></script>
+      
+        <script src="javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
