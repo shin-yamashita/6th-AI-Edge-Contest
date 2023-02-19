@@ -1,0 +1,46 @@
+site_name: 6th-AI-Edge-Contest 
+
+theme: 
+    name: material
+    features:
+        - toc.integrate
+        - navigation.top
+    icon:
+        repo: fontawesome/brands/github
+
+use_directory_urls: false
+
+markdown_extensions:
+    - mdx_math  
+    - pymdownx.highlight
+    - pymdownx.inlinehilite
+    - pymdownx.superfences
+    - pymdownx.snippets    
+    - pymdownx.keys
+    - pymdownx.arithmatex:
+        generic: true
+    - admonition
+    - pymdownx.details
+    - attr_list
+    - md_in_html
+    - tables
+    - def_list
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - toc:
+        permalink: true
+
+#extra_css:
+#    - stylesheets/extra.css
+
+extra_javascript:     
+    - javascripts/mathjax.js
+    - https://polyfill.io/v3/polyfill.min.js?features=es6
+    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+repo_url: https://github.com/shin-yamashita/6th-AI-Edge-Contest
+
+repo_name: shin-yamashita/6th-AI-Edge-Contest
+
+edit_uri: ""
+

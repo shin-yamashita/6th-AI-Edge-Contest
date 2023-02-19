@@ -1,0 +1,5 @@
+
+verilog work  .ip_user_files/ip/sysmon_0/sysmon_0.v .ip_user_files/ip/sysmon_0/sysmon_0_sysmon.v
+
+sv work  --include "../hdl/rv32_core" --include "./" ../hdl/rv32_core/rv_sysmon.sv tb_sysmon.sv
+

@@ -1,0 +1,24 @@
+
+
+verilog work ../hdl/rv32_core/dpram_h.v
+verilog work  $XILINX_VIVADO/data/verilog/src/glbl.v
+
+verilog work  .ip_user_files/ip/sysmon_0/sysmon_0.v .ip_user_files/ip/sysmon_0/sysmon_0_sysmon.v
+
+
+sv work --include "../hdl/rv32_core"  \
+ ../hdl/rv32_core/pkg_rv_decode.sv \
+ ../hdl/rv32_core/rv_muldiv.sv \
+ ../hdl/rv32_core/rv_alu.sv \
+ ../hdl/rv32_core/rv_regf.sv \
+ ../hdl/rv32_core/rv_core.sv \
+ ../hdl/rv32_core/dpram.sv \
+ ../hdl/rv32_core/rv_mem.sv \
+ ../hdl/rv32_core/rv_shm.sv \
+ ../hdl/rv32_core/rv32_core.sv \
+ ../hdl/rv32_core/rv_sio.sv \
+ ../hdl/rv32_core/rv_fpu.sv \
+ ../hdl/rv32_core/rv_sysmon.sv \
+ tb_rv32_core.sv
+
+

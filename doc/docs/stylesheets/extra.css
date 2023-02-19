@@ -1,0 +1,35 @@
+
+@media only screen and (min-width: 150em) {
+    /*
+    label.md-nav__link {
+        background-color: #3cb34057;
+        padding: 2px 2px 2px 10px;
+        font-size: 1.3rem;
+    }
+    
+    a.md-nav__link {
+        font-size: 1.3rem;
+    }
+    */
+    .md-grid {
+        max-width: 182rem;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .md-content {
+        margin-left: 1.2rem;
+    }
+    .md-sidebar--secondary {
+        /*width: 15%;*/
+        margin-left: 2%;
+    }
+    .md-sidebar--primary {
+        width: 15%;
+    }
+
+/*
+    .md-nav__title {
+        font-size: 1.7rem;
+    }
+    */
+}

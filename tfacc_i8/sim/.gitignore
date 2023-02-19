@@ -1,0 +1,9 @@
+
+*.wcfg
+*.wdb
+*.str
+*.pb
+xsim.dir
+.Xil
+.ip_user_files/
+dpi.h

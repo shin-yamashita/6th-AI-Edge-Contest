@@ -1,0 +1,59 @@
+
+# compile verilog/system verilog design source files
+verilog work  --include "../hdl/acc" --include "./" \
+".ip_user_files/ip/axi_ic/sim/axi_ic.v" \
+".ip_user_files/ipstatic/hdl/axi_interconnect_v1_7_vl_rfs.v" \
+".ip_user_files/ipstatic/simulation/blk_mem_gen_v8_4.v" \
+".ip_user_files/ip/rdbuf16k/sim/rdbuf16k.v" \
+".ip_user_files/ip/rdbuf2k/sim/rdbuf2k.v" \
+".ip_user_files/ip/rdbuf32k/sim/rdbuf32k.v" \
+".ip_user_files/ip/rdbuf4k/sim/rdbuf4k.v" \
+".ip_user_files/ip/rdbuf8k/sim/rdbuf8k.v" \
+.ip_user_files/ip/sysmon_0/sysmon_0.v .ip_user_files/ip/sysmon_0/sysmon_0_sysmon.v \
+"sync_fifo.v" \
+
+sv work  --include "../hdl/acc" --include "./" \
+"axi_slave_bfm.sv" \
+"../hdl/acc/input_arb.sv" \
+"../hdl/acc/input_cache.sv" \
+"../hdl/acc/output_arb.sv" \
+"../hdl/acc/output_cache.sv" \
+"../hdl/acc/rd_cache_nk.sv" \
+"../hdl/acc/tfacc_core.sv" \
+"../hdl/tfacc_memif.sv" \
+"../hdl/acc/u8adrgen.sv" \
+"../hdl/acc/i8mac.sv" \
+"../hdl/acc/rv_axi_port.sv" \
+
+#"tb_tfacc_core.sv" \
+
+verilog work ../hdl/rv32_core/dpram_h.v
+verilog work  $XILINX_VIVADO/data/verilog/src/glbl.v
+
+sv work  \
+ ../hdl/rv32_core/pkg_rv_decode.sv \
+ ../hdl/rv32_core/rv_alu.sv \
+ ../hdl/rv32_core/rv_muldiv.sv \
+ ../hdl/rv32_core/rv_regf.sv \
+ ../hdl/rv32_core/rv_core.sv \
+ ../hdl/rv32_core/dpram.sv \
+ ../hdl/rv32_core/rv_mem.sv \
+ ../hdl/rv32_core/rv_shm.sv \
+ ../hdl/rv32_core/rv32_core.sv \
+ ../hdl/rv32_core/rv_sio.sv \
+  ../hdl/rv32_core/rv_fpu.sv \
+ ../hdl/rv32_core/rv_sysmon.sv \
+ tb_tfacc_rv.sv
+ 
+# tb_rv32_core.sv
+
+
+
+# compile glbl module
+#verilog work "glbl.v"
+
+# Do not sort compile order
+nosort
+
+
+
