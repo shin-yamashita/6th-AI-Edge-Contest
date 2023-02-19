@@ -18,12 +18,14 @@
 - 推論ネットワークは Super-Fast-Accurate-3D-Object-Detection-PyTorch[^1] をベースに学習を行い、pytorch → TFlite 変換の後 8bit 量子化を行った  
 - アプリケーションは TFlite の python インターフェースと python C API を用い、RISC-V での BEV 画像生成処理は C言語で開発した  
 
-詳細は [doc/レポート](doc/report-20220320.pdf) 参照
+[^1](https://github.com/maudzung/SFA3D)
+
+詳細は [doc/レポート](https://shin-yamashita.github.io/6th-AI-Edge-Contest) 参照
 
 ### ./app/ [→推論実行アプリケーション](app/)  
 
 - python で記述した推論アプリケーション。  
-- Object Detection 推論ネットワークは [TF2 の SSD mobilenetv2](http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_mobilenet_v2_320x320_coco17_tpu-8.tar.gz) をベースに今回の課題に合わせて転移学習し、int8 量子化した。  
+- Object Detection 推論ネットワークは [SFA3D](https://github.com/maudzung/SFA3D) をベースに今回の課題に合わせて学習し、int8 量子化した。  
 
 ### ./tensorflow_src/tflite_delegate/  [→TFlite delegate interface](tensorflow_src/)  
 - 推論アプリから delegate API を介して C++ reference model または FPGA アクセラレータに実行委譲するインターフェース関数のソース。  
@@ -55,8 +57,8 @@
   └─ kria_syn           Logic synthesis environment
 ```
 ## References
-- [第5回AIエッジコンテスト（実装コンテスト③)](https://signate.jp/competitions/537)
-- [Avnet / Ultra96-PYNQ](https://github.com/Avnet/Ultra96-PYNQ/releases)
+- [第6回AIエッジコンテスト（実装コンテスト④)](https://signate.jp/competitions/732)
+- [Xilinx / Kria-PYNQ](https://github.com/Xilinx/Kria-PYNQ)
 - [tensorflow r2.7 sources](https://github.com/tensorflow/tensorflow/tree/r2.7) 
 - [TensorFlow Lite デリゲート](https://www.tensorflow.org/lite/performance/delegates)
 - [TensorFlow Lite カスタムデリゲートの実装](https://www.tensorflow.org/lite/performance/implementing_delegate#when_should_i_create_a_custom_delegate)
