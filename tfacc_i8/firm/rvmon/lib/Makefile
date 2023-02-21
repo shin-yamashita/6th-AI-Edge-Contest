@@ -55,7 +55,6 @@ fprint.o: fprint.c ../include/stdio.h ../include/types.h \
  ../include/stdint.h ../include/ulib.h ../include/time.h \
  ../include/ulib.h ../include/uartdrv.h
 memclr.o: memclr.c
-memset.o: memset.c
 readline.o: readline.c ../include/stdio.h ../include/types.h \
  ../include/stdint.h ../include/readline.h
 strlen.o: strlen.c
