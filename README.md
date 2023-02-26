@@ -18,13 +18,16 @@
 - 推論ネットワークは Super-Fast-Accurate-3D-Object-Detection-PyTorch[^1] をベースに学習を行い、pytorch → TFlite 変換の後 8bit 量子化を行った  
 - アプリケーションは TFlite の python インターフェースと python C API を用い、RISC-V での BEV 画像生成処理は C言語で開発した  
 
-[^1](https://github.com/maudzung/SFA3D)
+[^1]:https://github.com/maudzung/SFA3D
+[^1 SFA3D](https://github.com/maudzung/SFA3D)
 
-詳細は [doc/レポート](https://shin-yamashita.github.io/6th-AI-Edge-Contest) 参照
+詳細は [doc/ ](https://shin-yamashita.github.io/6th-AI-Edge-Contest) 参照
 
 ### ./app/ [→推論実行アプリケーション](app/)  
 
 - python で記述した推論アプリケーション。  
+- Xilinx [KV260](https://japan.xilinx.com/products/som/kria/kv260-vision-starter-kit/kv260-getting-started/getting-started.html) ボード上で FPGA に delegate 実行する。
+- PC 上では ハードウェア検証用 Reference model に delegate 実行する。
 - Object Detection 推論ネットワークは [SFA3D](https://github.com/maudzung/SFA3D) をベースに今回の課題に合わせて学習し、int8 量子化した。  
 
 ### ./tensorflow_src/tflite_delegate/  [→TFlite delegate interface](tensorflow_src/)  
@@ -56,6 +59,11 @@
   ├─ sim                Logic simulation environment
   └─ kria_syn           Logic synthesis environment
 ```
+## 推論実行結果
+
+![example-anime](doc/docs/rimg/anime.gif)
+![example-anime-r](doc/docs/rimg/anime-r.gif)
+
 ## References
 - [第6回AIエッジコンテスト（実装コンテスト④)](https://signate.jp/competitions/732)
 - [Xilinx / Kria-PYNQ](https://github.com/Xilinx/Kria-PYNQ)
