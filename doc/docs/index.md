@@ -62,7 +62,7 @@
   また、車体斜め45度方向の車の出現頻度は車体正面より少ない様であり、実用的にも車体正面が重要であるので正面の検出範囲を広げるのが良いと考えた  
 
 <figure>
- <img src=rimg/bev-capture.svg width=640>
+ <img src=rimg/anime_ov.gif width=640>
  <figcaption>図2.BEV 画像と heatmap 画像</figcaption></figure>
 
 
