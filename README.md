@@ -63,7 +63,10 @@
 
 app / infer.py 実行結果  
 320x320  BEV 画像と検出結果の heatmap  
+【国立大学法人東海国立大学機構名古屋大学・一般社団法人人間機械協奏技術コンソーシアムのデータセットを利用】  
 ![example-anime](doc/docs/rimg/anime_ov.gif)
+
+
 
 ## References
 - [第6回AIエッジコンテスト（実装コンテスト④)](https://signate.jp/competitions/732)
