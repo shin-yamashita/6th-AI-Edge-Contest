@@ -13,7 +13,7 @@
   (第5回コンテストで用いたものを out channel 4並列実行するよう修正して用いた)  
 - RISC-V は rv32emc に対応する CPU core を scratch から開発した  
   (第5回コンテストで用いたものに fpu を組み込んだ。fpu は整数レジスタを用いる形式"Zfinx"とした)  
-- アクセラレータの実行制御と、lider data から BEV 画像を生成する pre 処理を１つの RISC-Vで行った   
+- アクセラレータの実行制御と、lidar data から BEV 画像を生成する pre 処理を１つの RISC-Vで行った   
 - FPGA への実装は、アクセラレータ、RISC-V core とも SystemVerilog を用いた RTL 記述で行った  
 - 推論ネットワークは Super-Fast-Accurate-3D-Object-Detection-PyTorch[^1] をベースに学習を行い、pytorch → TFlite 変換の後 8bit 量子化を行った  
 - アプリケーションは TFlite の python インターフェースと python C API を用い、RISC-V での BEV 画像生成処理は C言語で開発した  

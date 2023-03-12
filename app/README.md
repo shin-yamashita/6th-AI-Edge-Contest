@@ -1,6 +1,7 @@
 
 # 推論実行アプリケーション
 
+
 ## 実行環境
 
 同一のソースで以下の２つの環境で動作を確認した。  
@@ -37,16 +38,12 @@
 
 - login  
   KV260 / PYNQ Linux, based on Ubuntu 20.04  
-  user : xilinx  
-  pass : kria-260  
-  ethernet address : kria.local  
 
   推論アプリ実行ディレクトリ :  
    /home/xilinx/app/  
 
-- FPGA 初期化 (起動時に自動的に行われる)  
-  初期化し直す場合は以下のコマンドを実行する  
-  `$ sudo /etc/rc.local`  
+- FPGA 初期化   
+  `$ sudo ./tfload`  
   FPGA に ~shin/fpga-data/design_1.bit をロードし、fpga 内 risc-v cpu にプログラムロードする  
   ロードが終了し、risc-v が起動すると、KV260 の fan control が働くため fan が静音化する  
   ```
@@ -79,12 +76,12 @@
   　　　　　　　BEV 画像と heatmap 画像を表示する  
   　　　　　　　カーソル <span style="color:magenta;">＋</span>: Pedestorian <span style="color:cyan;">＋</span>: Car  
   　　　　　　　BEV 画像の円は、半径 <span style="color:magenta;">40m</span>、<span style="color:cyan;">50m</span>  
-
   options : --size {S,M,L}  BEV 画像サイズを選択できる  
     　　　　　　　　　BEV size S:320/M:448/L:608 (default: S)  
     　　　　--rot45 　BEV 画像を 45度回転し、画像の幅、高さを 84m 相当に設定  
     　　　　--fg　　　risc-v の preproc を並列実行せず、順次処理にする  
 
+  【国立大学法人東海国立大学機構名古屋大学・一般社団法人人間機械協奏技術コンソーシアムのデータセットを利用】
 
 ### ○ 推論時間計測  
   ```bash
@@ -108,7 +105,7 @@
   PL_if_free():cma_munmap
   PL_if_free():cma_free
   ```
-  処理時間計測の起点: 　lider data 読み込みが完了した時点  
+  処理時間計測の起点: 　lidar data 読み込みが完了した時点  
   pre: 　 前処理の準備 (BEV 画像 → set_tensor()) が完了するまでの時間   
   pred:　interpreter を invoke() して結果 (heatmap) を得るまでの時間  
   post:　heatmap から物体位置 json data を求めるまでの時間
@@ -138,7 +135,7 @@
 ├── data/
 │   ├── meta
 │   │   ├── ans.json
-│   │   └── meta_data.json        参照先リスト → lider data の指定
+│   │   └── meta_data.json        参照先リスト → lidar data の指定
 │   └── train
 │        └── 3d_labels
 │             └── samples

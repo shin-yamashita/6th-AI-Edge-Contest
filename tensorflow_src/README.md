@@ -131,7 +131,7 @@ input_details  = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
   :
 # preproc
-bev_image = preproc.preproc(frame)  # lider data -> BEV image
+bev_image = preproc.preproc(frame)  # lidar data -> BEV image
 # set image
 interpreter.set_tensor(input_details[0]['index'], np.uint8(bev_image)) 
 # Invoke

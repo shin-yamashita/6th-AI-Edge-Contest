@@ -49,7 +49,7 @@ tfacc_i8/
 │   ├── rvmon                   rv32 firmware
 │   │   ├── include
 │   │   ├── lib                mini stdio etc library
-│   │   ├── rv_preproc.cc      Lider->BEV preproc algorithm
+│   │   ├── rv_preproc.cc      lidar->BEV preproc algorithm
 │   │   └── rvmon.c            monitor program / Acc control(interrupt)
 │   └── term/                   debug serial terminal
 ├── hdl                         FPGA RTL sources
