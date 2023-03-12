@@ -1,7 +1,7 @@
 
 # TFlite delegate と rv32emc を RTL で実装
 
-2023/02/19   　 s.yamashita
+2023/03/04   　 s.yamashita
 
 ## 課題
 
@@ -14,7 +14,7 @@
   (第5回コンテストで用いたものを out channel 4並列実行するよう修正して用いた)  
 - RISC-V は rv32emc に対応する CPU core を scratch から開発した  
   (第5回コンテストで用いたものに fpu を組み込んだ。fpu は整数レジスタを用いる形式"Zfinx"とした)  
-- アクセラレータの実行制御と、lider data から BEV 画像を生成する pre 処理を１つの RISC-Vで行った   
+- アクセラレータの実行制御と、LiDAR data から BEV 画像を生成する pre 処理を１つの RISC-Vで行った   
 - FPGA への実装は、アクセラレータ、RISC-V core とも SystemVerilog を用いた RTL 記述で行った  
 - 推論ネットワークは Super-Fast-Accurate-3D-Object-Detection-PyTorch[^1] をベースに学習を行い、pytorch → TFlite 変換の後 8bit 量子化を行った  
 - アプリケーションは TFlite の python インターフェースと python C API を用い、RISC-V での BEV 画像生成処理は C言語で開発した  
@@ -24,7 +24,7 @@
 ## 推論ネットワーク
 
 - 3D物体検出のベースネットワークは Super-Fast-Accurate-3D-Object-Detection-PyTorch[^1] (SFA3D) を選択した  
-  車両全方位の lider データから BEV 鳥瞰画像を生成し、fpn_resnet_18 を用いた centernet で物体中心座標を推論する  
+  車両全方位の LiDAR データから BEV 鳥瞰画像を生成し、fpn_resnet_18 を用いた centernet で物体中心座標を推論する  
 - 学習には提供された OperaDataset のうち、全方位でアノテーションされているデータのみ用い、train 90% val 10% に分けて学習した  
 - 今回の課題では物体の中心座標のみ求めるので、動作速度の観点でネットワークの出力を heatmap と center offset に絞った  
   また、fpn_resnet_18 の中の ReLU を ReLU6 に変更したところ量子化後の精度が若干改善した  
@@ -81,8 +81,8 @@
 
 
 
-- 以下は、TFlite の benchmark tool を KV-260 の CPU(aarch64) 上で実行し、今回のネットワーク(608x608)を分析した結果である。  
-  CPU での推論実行時間は約 7.55 s であり、Conv2D の演算で 96.2% を占める。Conv2D 演算を FPGA にdelegate する  
+- 以下は、TFlite の benchmark tool を KV-260 の CPU Arm® Cortex-A53 上で実行し、今回のネットワーク(608x608)を分析した結果である。  
+  Arm での推論実行時間は約 7.55 s であり、Conv2D の演算で 96.2% を占める。Conv2D 演算を FPGA にdelegate する  
 ```
 Number of nodes executed: 79
 ============================ Summary by node type ===========
@@ -126,11 +126,11 @@ Interpreter起動時、インターフェース関数の Prepare() が一度だ�
 今回は、第５回コンテストで用いたアクセラレータに、output channel を 4並列で処理するように変更を行ったが、アクセラレータの Conv filter 係数のアクセス順序が連続するように filter 係数の並べ替えを行った。この並べかえも Prepare() で行った。　  
 
 FPGA に渡した Conv演算パラメータは、FPGA 側に設けた RISC-V CPU で並列演算に対応した形に変換して Conv演算アクセラレータのシーケンサに与え、kick する。  
-FPGA の CPU は、シーケンサの終了を待って、output buffer に残ったデータを CMA 領域に flush して演算を終了し、アプリケーションに通知する。  
+RISC-V は、シーケンサの終了を待って、output buffer に残ったデータを CMA 領域に flush して演算を終了し、アプリケーションに通知する。  
 
 以上が Interpreter と FPGA アクセラレーターが連携して推論ネットワークの演算を行う流れである。  
-今回の課題では、 lider data を BEV 画像に変換する pre 処理、ネットワークの出力である heatmap から物体位置を計算する post 処理が必要である。  
-これらの処理のうち、より多くの演算処理の必要な pre 処理を、RISC-V で実行した。更に、pre 処理と Interpreter の推論処理を並行して実行できるようにして実行時間の増大を抑えた。  
+今回の課題では、 LiDAR data を BEV 画像に変換する pre 処理、ネットワークの出力である heatmap から物体位置を計算する post 処理が必要である。  
+これらの処理のうち、より多くの演算処理の必要な pre 処理を、RISC-V で実行した。RISC-V のクロックは 100MHz と遅く実行時間がかかるが、Interpreter の推論時間を下回ることができた。このため pre 処理と Interpreter の推論処理を並行して実行するようにして pre 処理の実行時間を隠蔽することができた。  
 
 アクセラレーターの制御は RISC-V の割り込み処理で行っており、pre 処理と平行に実行される。  
 
@@ -139,9 +139,9 @@ FPGA の CPU は、シーケンサの終了を待って、output buffer に残�
 
 ## rv32emc core のハードウェア
 
-第5回コンテストで用いた RISC-V コアは、SystemVerilog で scratch から記述したものである。  
+第5回コンテストで用いた RISC-V CPU は、SystemVerilog で scratch から記述したものである。  
 RISC-V の ISA のうち、組み込み用途向けの EMC (32bit 16 Register, Mul/Div, Compressed 命令) の構成で開発した。[^5]  
-今回この CPU core に fpu を追加した。  
+今回この CPU に fpu を追加した。  
 fp レジスタを設けずに、整数レジスタを共用する Zfinx 仕様[^6]としてハード規模を抑えた。ただし、fmadd/fmsub 命令は３オペランド命令で追加による変更規模が大きく、実装しなかった。  
 クロスコンパイラは riscv-gnu-toolchain で Zfinx に対応したもの[^7] (gcc バージョンは 10.2.0) に改造を加え fmadd/fmsub を使わないようにする修正を行っている。
 
@@ -168,11 +168,11 @@ $ make newlib
 ## FPGAに実装したハードウエア構成
 
 図5に FPGA PL 部に実装したアクセラレータのブロック構成を示す。  
-第5回コンテストで用いた回路を output channel 4 並列処理できるように修正し、制御及び lider data プレ処理用 CPU として前述の rv32emc CPU を用いた。  
-また、CPU とアクセラレータのクロックを分離し、コントロールが非同期でできるように改修したので、CPU とアクセラレータのクロック周波数を独立して設定できるようになった。  
+第5回コンテストで用いた回路を output channel 4 並列処理できるように修正し、制御及び LiDAR data プレ処理用 CPU として前述の RISC-V CPU を用いた。  
+また、RISC-V とアクセラレータのクロックを分離し、コントロールが非同期でできるように改修したので、RISC-V とアクセラレータのクロック周波数を独立して設定できるようになった。  
 
 PS のアプリケーションは、AXI-APB bridge を介してRISC-V の RAM をアクセスすることができる。  
-RISC-V の実行バイナリを RAM にロードし、reset を解除することで CPU を起動する。  
+RISC-V の実行バイナリを RAM にロードし、reset を解除することで RISC-V を起動する。  
 また、APB から 割り込みを発生し、アクセラレータの制御を kick する。  
 
 <figure><img src=rimg/tfacc-blk-6th.svg width=800><figcaption>図5. PL ブロック図</figcaption></figure>
@@ -241,7 +241,7 @@ input_details  = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
   :
 # preproc
-bev_image = preproc.preproc(frame)  # lider data -> BEV image
+bev_image = preproc.preproc(frame)  # LiDAR data -> BEV image
 # set image
 interpreter.set_tensor(input_details[0]['index'], np.uint8(bev_image)) 
 # Invoke
@@ -263,9 +263,9 @@ det = postproc.postproc(heatmap, cen_offset)
 
 以下、推論実行のシーケンスである  
 
-1. lider data を file から読み込み、python C API を介して preproc module に渡す  
-2. preproc module は lider data を CMA 領域にコピーし、RISC-V を kick する  
-3. RISC-V は lider data から BEV 画像への変換処理を行う  
+1. LiDAR data を file から読み込み、python C API を介して preproc module に渡す  
+2. preproc module は LiDAR data を CMA 領域にコピーし、RISC-V を kick する  
+3. RISC-V は LiDAR data から BEV 画像への変換処理を行う  
 4. 1 frame 前の preproc で生成された BEV 画像を TFlite interpreter に set_tensor() して invoke() する  
 5. 推論結果の heatmap と center-offset から物体位置を計算し、json に出力する  
 
@@ -280,7 +280,7 @@ RISC-V ではアクセラレータの制御は割り込み処理によって行�
 
 #### 推論処理時間詳細
 
-推論時間は、PS の CPU と FPGA/RISC-V で分担されており、FPGAの実行時間は FPGA内に実装したカウンタで測定した。  
+推論時間は、PS の Arm と FPGA/RISC-V で分担されており、FPGAの実行時間は FPGA内に実装したカウンタで測定した。  
 図11 に結果を示す。
 
 <figure><img src=rimg/elapsed.svg><figcaption>
@@ -299,16 +299,16 @@ RISC-V の preproc は並行して処理され、表には現れない。
 - アクセラレータは output チャンネルの 4並列化を実装し、MACの並列数を 128 並列にすることができた。
   ソフトウェアで filter 係数の並べ替えを行うことでハードウエアの複雑化を回避した。  
 
-- RISC-V (rv32emc) を RTL で実装し、FPGAに組み込んで、アクセラレータ制御と Lider データの前処理に用いた。 
-  Zfinx 仕様の fpu を新たに開発して組み込み、Lider data の処理に活用した。  
+- RISC-V (rv32emc) を RTL で実装し、FPGAに組み込んで、アクセラレータ制御と LiDAR データの前処理に用いた。 
+  Zfinx 仕様の fpu を新たに開発して組み込み、LiDAR data の処理に活用した。  
 
 ### 今後の課題
 
-- CPUでの推論実行に対し、FPGA での実行で推論精度が若干低下することがわかっている。
-acc 回路の丸めについて詳細に調査する必要がある。  
+- Arm での推論実行に対し、FPGA での実行で推論精度が若干低下することがわかっている。
+acc 回路の丸めは Arm の処理より下位ビットを削っており、丸め精度について詳細に調査する必要がある。  
 
-- 動作速度は CPU 100MHz、アクセラレータ 187MHz が限界であった。クリチカルパスを調査し、論理段数を減らす必要がある。  
-  アクセラレータは pipeline 化の余地がある。CPU は compress 命令対応が速度低下の一因であるので仕様変更が有効かもしれない。  
+- 動作速度は RISC-V 100MHz、アクセラレータ 187MHz が限界であった。クリチカルパスを調査し、論理段数を減らす必要がある。  
+  アクセラレータは pipeline 化の余地がある。RISC-V は compress 命令対応が速度低下の一因であるので仕様変更が有効かもしれない。  
 
 - これまでアクセラレータに delegate する演算を Conv2D に限ってきたが、ハード規模の増大を抑えつつ対応できる演算を増やすことを考えてみたい。  
 
