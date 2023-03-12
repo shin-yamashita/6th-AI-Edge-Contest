@@ -17,7 +17,7 @@
 - **tfacc_load.py**  
   FPGA に fpga-data/design_1.bit ファイルから回路のコンフィグレーションを行う。  
   また、rv32emc コアのメモリーに、アクセラレータ制御プログラム(fpga-data/rvmon.mot) をロードする。  
-- **infer.py**  
+- **app/infer.py**  
   tflite_runtime python ライブラリを用いて推論実行を行う。   
 - **tensorflow_src/tflite_delegate/**  
   TFlite の delegate API で FPGA と接続するためのインターフェース関数のソースである。  
@@ -32,19 +32,16 @@
    - python3 の version は 3.8.10 
    - python3-opencv Pillow のインストールが必要  
    - [../tensorflow_src/README.md](../tensorflow_src/README.md) に従って tflite-runtime の build/install  
-    及び dummy_external_delegate.so を build しておく。  
+    及び dummy_external_delegate.so を build しておく。  ~/app/model/dummy_external_delegate.so に配置する。  
 
 #### KV260 での推論実行
 
 - login  
   KV260 / PYNQ Linux, based on Ubuntu 20.04  
 
-  推論アプリ実行ディレクトリ :  
-   /home/xilinx/app/  
-
 - FPGA 初期化   
-  `$ sudo ./tfload`  
-  FPGA に ~shin/fpga-data/design_1.bit をロードし、fpga 内 risc-v cpu にプログラムロードする  
+  `$ sudo ./facc_load.py`  
+  FPGA に ./fpga-data/design_1.bit をロードし、fpga 内 risc-v cpu にプログラムロードする  
   ロードが終了し、risc-v が起動すると、KV260 の fan control が働くため fan が静音化する  
   ```
   ** Load "design_1.bit" to Overlay
@@ -60,7 +57,7 @@
 ### ○ 結果を画像で表示  
 
   ```bash
-   $ cd ~xilinx/app/
+   $ cd ~/app/
    $ sudo ./infer.py --view {options}
   ```
   - `../data/meta/meta_data.json` にしたがって `../data/train/3d_labels/samples/LIDAR_TOP/*.bin` を読んで推論実行し、結果を画像で表示  
@@ -125,13 +122,18 @@
 │   │   └── xlnk_wrap.cc         xrt xlnk wrapper
 │   ├── model/                TFlite graph
 │   │   ├── dummy_external_delegate.so    tflite delegate interface lib
-│   │   ├── model-int8-320-R.tflite
-│   │   ├── model-int8-320.tflite
-│   │   ├── model-int8-448-R.tflite
-│   │   ├── model-int8-448.tflite
-│   │   ├── model-int8-608-R.tflite
-│   │   ├── model-int8-608.tflite
+│   │   ├── model-int8e-320-R.tflite
+│   │   ├── model-int8e-320.tflite
+│   │   ├── model-int8e-448-R.tflite
+│   │   ├── model-int8e-448.tflite
+│   │   ├── model-int8e-608-R.tflite
+│   │   ├── model-int8e-608.tflite
 │   └── result/
+├── tfacc_load.py               FPGA 初期化
+├── fpga-data
+│   ├── design_1.bit
+│   ├── design_1.hwh
+│   └── rvmon.mot               RISC-V program
 ├── data/
 │   ├── meta
 │   │   ├── ans.json
@@ -141,12 +143,11 @@
 │             └── samples
 │                  └── LIDAR_TOP   
 │                       ├── *.bin   
-├── TF/
-      ├── tensorflow_src/  
-           └── tflite_delegate/      tflite delegate interface source
-                └── bazel-bin            binary
-                     └── tflite_delegate
-                          ├── dummy_external_delegate.so
+├── tensorflow_src/  
+     └── tflite_delegate/      tflite delegate interface source
+          └── bazel-bin            binary
+                └── tflite_delegate
+                    ├── dummy_external_delegate.so
 ```
 
 
